@@ -14,19 +14,35 @@ https://labs.chaicode.com/
 
 ## Week 01
 computers, commands
-### T-Class
-Git
 
 ## Week 02
 ### Sat
-HTML
-
-### Sun
-CSS
+HTML, CSS
 
 
+## Week 03
+
+## Week 04
+### JS Essentials
+```
+Print Statements, 
+variable (let,const,var) , 
+datatypes
+ Numbers |  Strings |  BigInt |  Null |  undefined |  Symbols |  Array |  Object
+
+```
+
+## week 05
+**object oriented Javascript**
+this,call,bind,apply,prototye
 
 
-code ki kismat hi h fatna
-paise ki kismat h kharch hona
-jimmedari wale khando ko thakne ki ijjat nhi hoti
+
+
+
+
+code ki kismat hi h fatna <br>
+paise ki kismat h kharch hona <br>
+jimmedari wale khando ko thakne ki ijjat nhi hoti <br>
+man sacha karm acha baki shiv ki ICHA <br>
+programmer fav line it depends
