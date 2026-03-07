@@ -12,17 +12,19 @@ https://www.masterji.co/dashboard
 for tasks
 https://labs.chaicode.com/
 
-## Week 01
+# Week 01
 computers, commands
 
-## Week 02
+# Week 02
 ### Sat
 HTML, CSS
 
 
-## Week 03
+# Week 03
+### Chai aur JS
+### JS for Beginners
 
-## Week 04
+# Week 04
 ### JS Essentials
 ```
 Print Statements, 
@@ -31,12 +33,21 @@ datatypes
  Numbers |  Strings |  BigInt |  Null |  undefined |  Symbols |  Array |  Object
 
 ```
+### JS Essentials Continue
 
-## week 05
-**object oriented Javascript**
+# week 05
+### object oriented Javascript
 this,call,bind,apply,prototye
 
+### object oriented Programmig
 
+# week 06
+### Async js  
+### Modern Async Pattern
+- Clousure, Queue system, Prmoises
+- DOM
+
+###  JS Concept Guide
 
 
 
