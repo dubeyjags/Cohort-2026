@@ -44,9 +44,11 @@ this,call,bind,apply,prototye
 # Week-06
 ### Async js  
 - promise
-- then
-- catch
-- fetch
+- then, catch, fetch
+- async/await
+- try/catch
+- call stack
+- event loop
 
 ### Modern Async Pattern
 - Clousure, Queue system, Prmoises
@@ -56,8 +58,10 @@ this,call,bind,apply,prototye
 
 # Week-07 
 ### Backend Engineering
-
-
+- Http methods (GET,post,put,patch,delete,head,options)
+- Node (Node foundations)
+- LIBUV
+- TypeScript (basics)
 
 
 code ki kismat hi h fatna <br>
