@@ -63,6 +63,12 @@ this,call,bind,apply,prototye
 - LIBUV
 - TypeScript (basics)
 
+### Backend with TypeScript
+- webserver, client, backend
+- http, createserver, methods (Get,Post)
+- depency tree, Express (bun,hono,elysia, nest, fastify)
+- Express with typescript
+
 
 code ki kismat hi h fatna <br>
 paise ki kismat h kharch hona <br>
