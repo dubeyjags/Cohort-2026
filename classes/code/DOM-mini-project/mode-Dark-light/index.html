@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Modern Todo & Gallery App</title>
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --primary-color: #3498db;
+            --secondary-color: #e74c3c;
+            --accent-color: #f39c12;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark {
+            --bg-color: #1a1a1a;
+            --text-color: #ecf0f1;
+            --card-bg: #2c2c2c;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .light {
+            --bg-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-color) 100%);
+            color: var(--text-color);
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            min-height: 100vh;
+            transition: var(--transition);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .details {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding: 2rem;
+            gap: 2rem;
+            min-height: 80vh;
+        }
+
+        .content {
+            background: var(--card-bg);
+            color: var(--text-color);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            width: 45%;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .content:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        select {
+            padding: 0.75rem 1rem;
+            margin-right: 1rem;
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        select:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        input {
+            padding: 0.75rem 1rem;
+            margin-right: 1rem;
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        input::placeholder {
+            color: rgba(44, 62, 80, 0.6);
+        }
+
+        .content section {
+            display: flex;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .content section input {
+            flex: 1;
+        }
+
+        ul#list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 300px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            border-radius: 12px;
+        }
+
+        ul#list li {
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        ul#list li:last-child {
+            border-bottom: none;
+        }
+
+        ul#list li:hover {
+            background: rgba(52, 152, 219, 0.05);
+            transform: translateX(4px);
+        }
+
+        ul#list li span {
+            cursor: pointer;
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            padding: 0.25rem 0.5rem;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        ul#list li span:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        #imageList {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        #imageList li {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        #imageList li:hover {
+            transform: scale(1.05);
+        }
+
+        #imageList li.active {
+           border-color: var(--primary-color);
+        }
+
+        #imageList li img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        #imageList li:hover img {
+            filter: brightness(1.1) saturate(1.2);
+        }
+
+        #bigImage {
+            width: 100%;
+            height: 400px;
+            margin-top: 1rem;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        #bigImage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        #bigImage:hover img {
+            transform: scale(1.02);
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+
+        /* Animation for new items */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .new-item {
+            animation: slideIn 0.3s ease-out;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <select id="mode">
+            <option value="orange">Orange</option>
+            <option value="blue">Blue</option>
+        </select>
+        <button id="toggle">Toggle Dark/Light Mode</button>
+    </div>
+    <div class="details">
+        <div class="content">
+            <h2>TO-DO</h2>
+          <section>
+            <input id="input" type="text" />
+            <button id="add" type="submit" >Add</button>
+          </section>
+          <ul id="list"></ul>
+        </div>
+        <div class="content">
+            <h2>Image Gallery</h2>
+            <ul id="imageList">
+                <li><img src="https://pbs.twimg.com/profile_images/1966051739284680708/LF2h7Nnk_400x400.jpg" alt="Anirudh"></li>
+                <li><img src="https://pbs.twimg.com/profile_images/1724344976715468800/MasktpKz_400x400.jpg" alt="Hitesh Chaudhary"></li>
+                <li><img src="https://pbs.twimg.com/profile_images/1991479533946695684/uL2HzvWv_400x400.jpg" alt="Piyush"></li>
+                <li><img src="https://pbs.twimg.com/profile_images/2020183972102483968/cnZILaPG_400x400.jpg" alt="Suraj"></li>
+                <li><img src="https://pbs.twimg.com/profile_images/1886363558432165888/3R_sXNG8_400x400.jpg" alt="Akash"></li>
+            </ul>
+            <div id="bigImage">
+                <img src="https://pbs.twimg.com/profile_images/1724344976715468800/MasktpKz_400x400.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    <script>
+        const mode = document.getElementById('mode');
+        const toggle = document.getElementById('toggle');
+
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+        });
+
+        
+        const input = document.getElementById('input');
+        const add = document.getElementById('add');
+        const list = document.getElementById('list');
+        const cross = document.getElementsByClassName('cross');       
+        
+        add.addEventListener('click', () => {
+            if(input.value.trim() === '') return;
+            const li = document.createElement('li');
+            li.textContent = input.value;
+            li.innerHTML += `<span class="cross">×</span>`;
+            li.classList.add('new-item');
+            list.appendChild(li);
+            input.value = '';
+            const cross = li.querySelector('.cross');
+            cross.addEventListener('click', () => {
+                li.remove();
+            });
+        });
+
+        const imageList = document.getElementById('imageList');
+        const bigImage = document.getElementById('bigImage').querySelector('img');
+
+        imageList.addEventListener('click', (e) => {
+            imageList.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+            e.target.parentElement.classList.add('active');
+            bigImage.src = e.target.src;
+        });
+
+    </script>
+</body>
+</html>
