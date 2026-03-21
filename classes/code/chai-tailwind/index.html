@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chai tailwind | custom tailwind class with page</title>
+    <style>
+      * {
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body
+    class="chai-bg-#f8f9fa chai-p-0px chai-m-0px chai-fontFamily-sans chai-color-#333333"
+  >
+    <div
+      class="chai-w-80% chai-mx-auto chai-bg-white chai-p-20px chai-shadow-md"
+    >
+      <header
+        class="chai-align-center chai-mb-2 chai-pb-20px chai-border-b-3px chai-border-color-#ff6b6b"
+      >
+        <h1 class="chai-text-3xl chai-font-bold chai-mb-2 chai-color-#ff6b6b">
+          Welcome to Chai Tailwind
+        </h1>
+        <p class="chai-text-lg chai-mb-0 chai-color-#4ecdc4">
+          This is a custom implementation of Tailwind CSS using JavaScript.
+        </p>
+      </header>
+      <main>
+        <section
+          class="chai-mb-2 chai-p-16px chai-bg-#f0f7ff chai-border-radius-8px chai-border-l-4px chai-border-color-#4ecdc4"
+        >
+          <h2 class="chai-text-2xl chai-font-bold chai-mb-1 chai-color-#2ecc71">
+            Features
+          </h2>
+          <ul class="chai-pl-20px chai-gap-2 d-flex chai-flex-col chai-list-none">
+            <li><a href="#style-and-color-elements" class="chai-text-decoration-none chai-color-#ff6b6b chai-font-bold">Style and Color elements</a></li>
+            <li><a href="#typography" class="chai-text-decoration-underline chai-color-#2ecc71 chai-font-bold">Typography</a></li>
+            <li><a href="#box-model" class="chai-text-decoration-underline chai-color-#2ecc71 chai-font-bold">Box model</a></li>
+            <li><a href="#display-and-alignment" class="chai-text-decoration-underline chai-color-#2ecc71 chai-font-bold">Display & Alignment</a></li>
+            <li><a href="#shadows-and-effects" class="chai-text-decoration-underline chai-color-#2ecc71 chai-font-bold">Shadows & Effects</a></li>
+            <li><a href="#position" class="chai-text-decoration-underline chai-color-#2ecc71 chai-font-bold">Position</a></li>
+            <li><a href="#misc-utilities" class="chai-text-decoration-underline chai-color-#2ecc71 chai-font-bold">Misc Utilities</a></li>
+          </ul>
+        </section>
+        <section
+          class="chai-mb-2 chai-p-16px chai-bg-#fff5f0 chai-border-radius-8px"
+        >
+          <h2 class="chai-text-2xl chai-font-bold chai-mb-1 chai-color-#ff6b6b">
+            <a name="style-and-color-elements"></a> Style and Color Elements
+          </h2>
+          <p class="chai-mb-1 chai-color-#555555">
+            Use css class
+            <code class="chai-bg-#f2f2f2 chai-p-4px chai-border-radius-3px"
+              >chai-bg-'color-name' or chai-bg-'hex-code'</code>
+            to set the <b>background color</b> of an element:
+          </p>
+          <div class="chai-d-flex chai-gap-2 chai-mb-1">
+            <div
+              class="chai-bg-grey chai-p-12px chai-border-radius-6px chai-shadow-sm chai-flex-1"
+            >
+              class="chai-bg-grey"
+            </div>
+            <div
+              class="chai-bg-#121212 chai-p-12px chai-border-radius-6px chai-shadow-sm chai-flex-1 chai-color-white"
+            >
+              class="chai-bg-#121212"
+            </div>
+          </div>
+
+          <h3
+            class="chai-text-xl chai-font-bold chai-mb-1 chai-mt-2 chai-color-#3498db"
+          >
+            Colors
+          </h3>
+          <p class="chai-mb-1 chai-color-#555555">
+            Use css class
+            <code class="chai-bg-#f2f2f2 chai-p-4px chai-border-radius-3px"
+              >chai-color-'color-name'</code>
+            to set the text color:
+          </p>
+          <p class="chai-color-red chai-mb-1">class="chai-text-red"</p>
+          <p class="chai-color-#3498db chai-mb-1">class="chai-text-#3498db"</p>
+        </section>
+        <section
+          class="chai-mb-2 chai-p-16px chai-bg-#f5f0ff chai-border-radius-8px"
+        >
+          <h2
+            class="chai-text-2xl chai-font-bold chai-mb-1 chai-color-#9b59b6"
+          >
+            <a name="typography"></a> Typography
+          </h2>
+          <p class="chai-mb-1 chai-color-#555555">
+            Use css class
+            <code class="chai-bg-#f2f2f2 chai-p-4px chai-border-radius-3px"
+              >chai-text-'size'</code>
+            to set the font size of an element:
+          </p>
+          <div
+            class="chai-bg-white chai-p-12px chai-border-radius-6px chai-mb-1"
+          >
+            <p class="chai-text-xs chai-mb-2">class="chai-text-xs"</p>
+            <p class="chai-text-sm chai-mb-2">class="chai-text-sm"</p>
+            <p class="chai-text-md chai-mb-2">class="chai-text-md"</p>
+            <p class="chai-text-lg chai-mb-2">class="chai-text-lg"</p>
+            <p class="chai-text-xl chai-mb-2">class="chai-text-xl"</p>
+            <p class="chai-text-2xl chai-mb-2">class="chai-text-2xl"</p>
+            <p class="chai-text-3xl chai-mb-2">class="chai-text-3xl"</p>
+            <p class="chai-text-40px">class="chai-text-40px"</p>
+          </div>
+        </section>
+        <section
+          class="chai-mb-2 chai-p-16px chai-bg-#fffaf0 chai-border-radius-8px"
+        >
+          <h2 class="chai-text-2xl chai-font-bold chai-mb-1 chai-color-#f39c12">
+           <a name="box-model"></a> Box Model
+          </h2>
+          <h3 class="chai-text-lg chai-font-bold chai-mb-1 chai-color-#d35400">
+            Padding
+          </h3>
+          <p class="chai-mb-1 chai-color-#555555">
+            Use css class
+            <code class="chai-bg-#f2f2f2 chai-p-4px chai-border-radius-3px"
+              >chai-p-'size'</code>
+            to set padding:
+          </p>
+          <div
+            class="chai-bg-white chai-p-12px chai-border-radius-6px chai-mb-1 chai-border-l-4px chai-border-color-#f39c12"
+          >
+            <code
+              class="chai-p-8px chai-bg-#f2f2f2 chai-d-block chai-mb-2 chai-border-radius-3px"
+              >class="chai-p-1" → 8px padding</code>
+            <code
+              class="chai-p-12px chai-bg-#f2f2f2 chai-d-block chai-border-radius-3px"
+              >class="chai-p-12px" → 12px padding</code>
+          </div>
+          <h4 class="chai-text-md chai-font-bold chai-mb-2 chai-color-#e67e22">
+            Padding X & Y
+          </h4>
+          <code
+            class="chai-mb-3 chai-px-12px chai-bg-#f2f2f2 chai-d-block chai-p-8px chai-border-radius-3px"
+            >class="chai-px-12px" → left & right padding</code
+          >
+          <code
+            class="chai-mb-1 chai-py-12px chai-bg-#f2f2f2 chai-d-block chai-p-8px chai-border-radius-3px"
+            >class="chai-py-12px" → top & bottom padding</code
+          >
+          <h4 class="chai-text-md chai-font-bold chai-mb-1 chai-color-#e67e22">
+            Padding with Position
+          </h4>
+          <code
+            class="chai-mb-2 chai-pt-12px chai-bg-#f2f2f2 chai-d-block chai-p-8px chai-border-radius-3px"
+            >class="chai-p{position}-12px" → t:top r:right b:bottom l:left</code
+          >
+          <h3 class="chai-text-lg chai-font-bold chai-mb-1 chai-color-#d35400">
+            Margin
+          </h3>
+          <code
+            class="chai-mb-1 chai-m-1 chai-bg-#f2f2f2 chai-d-block chai-p-8px chai-border-radius-3px"
+            >class="chai-m-1" → 8px margin</code
+          >
+          <h3 class="chai-text-lg chai-font-bold chai-mb-1 chai-color-#d35400">
+            Border
+          </h3>
+          <code
+            class="chai-mb-1 chai-border-2px chai-border-color-#ff0000 chai-border-radius-6px chai-bg-#f2f2f2 chai-d-block chai-p-8px"
+            >class="chai-border-2px chai-border-color-#ff0000
+            chai-border-radius-6px"</code
+          >
+          <h2 class="chai-text-2xl chai-font-bold chai-mb-1 chai-color-#2980b9">
+            Width & Height
+          </h2>
+
+          <p class="chai-mb-1 chai-color-#555555">
+            Control element size using width and height utilities.
+          </p>
+
+          <code class="chai-d-block chai-mb-1">
+            chai-w-100% → width: 100%
+          </code>
+
+          <code class="chai-d-block chai-mb-1"> chai-w-50% → width: 50% </code>
+
+          <code class="chai-d-block chai-mb-1">
+            chai-h-100px → height: 100px
+          </code>
+
+          <div
+            class="chai-bg-#3498db chai-w-50% chai-h-100px chai-border-radius-6px chai-color-white chai-d-flex chai-align-center chai-justify-center"
+          >
+            <code>chai-w-50% chai-h-100px</code>
+          </div>
+           <h2 class="chai-text-2xl chai-font-bold chai-mb-1 chai-color-#2980b9">
+            Gap
+          </h2>
+           <p class="chai-mb-1 chai-color-#555555">
+            Use css class
+            <code class="chai-bg-#f2f2f2 chai-p-4px chai-border-radius-3px"
+              >chai-gap-'size'</code>
+            for gap between elements:
+          </p>
+          <div
+            class="chai-d-flex chai-gap-3 chai-bg-white chai-p-12px chai-border-radius-6px"
+          >
+            <div
+              class="chai-bg-#16a085 chai-p-12px chai-border-radius-4px chai-text-white chai-flex-1"
+            >
+              Gap Item 1
+            </div>
+            <div
+              class="chai-bg-#16a085 chai-p-12px chai-border-radius-4px chai-text-white chai-flex-1"
+            >
+              Gap Item 2
+            </div>
+            <div
+              class="chai-bg-#16a085 chai-p-12px chai-border-radius-4px chai-text-white chai-flex-1"
+            >
+              Gap Item 3
+            </div>
+          </div>
+        </section>
+    
+        <section
+          class="chai-mb-2 chai-p-16px chai-bg-#eef9ff chai-border-radius-8px"
+        >
+          <h2 class="chai-text-2xl chai-font-bold chai-mb-1 chai-color-#2980b9">
+           <a name="display-and-alignment"></a> Display & Alignment
+          </h2>
+          <p class="chai-mb-1 chai-color-#555555">
+            Use
+            <code class="chai-bg-#f2f2f2 chai-p-4px chai-border-radius-3px"
+              >chai-d-flex</code>
+            or
+            <code class="chai-bg-#f2f2f2 chai-p-4px chai-border-radius-3px"
+              >chai-d-grid</code>
+            for layouts:
+          </p>
+          <div class="chai-d-flex chai-gap-3 chai-mb-1">
+            <div
+              class="chai-bg-#3498db chai-p-12px chai-border-radius-6px chai-text-white chai-flex-1"
+            >
+              Flex Item 1
+            </div>
+            <div
+              class="chai-bg-#9b59b6 chai-p-12px chai-border-radius-6px chai-text-white chai-flex-1"
+            >
+              Flex Item 2
+            </div>
+            <div
+              class="chai-bg-#e74c3c chai-p-12px chai-border-radius-6px chai-text-white chai-flex-1"
+            >
+              Flex Item 3
+            </div>
+          </div>
+           <p class="chai-mb-1 chai-color-#555555">
+            Control layout using display utilities.
+          </p>
+
+          <code class="chai-d-block chai-mb-1">
+            chai-d-block → display: block
+          </code>
+
+          <code class="chai-d-block chai-mb-1">
+            chai-d-inline → display: inline
+          </code>
+
+          <code class="chai-d-block chai-mb-1">
+            chai-d-flex → display: flex
+          </code>
+
+          <div class="chai-d-flex chai-gap-2">
+            <div class="chai-bg-#2ecc71 chai-p-12px chai-color-white">
+              Item 1
+            </div>
+            <div class="chai-bg-#27ae60 chai-p-12px chai-color-white">
+              Item 2
+            </div>
+          </div> 
+          <h2 class="chai-text-2xl chai-font-bold chai-mb-1 chai-mt-4 chai-color-#c0392b">
+            Flex Alignment
+          </h2>
+
+          <p class="chai-mb-1 chai-color-#555555">
+            Align items using flex utilities.
+          </p>
+
+          <code class="chai-d-block chai-mb-1">
+            chai-justify-center → center horizontally
+          </code>
+
+          <code class="chai-d-block chai-mb-1">
+            chai-justify-between → space between
+          </code>
+
+          <code class="chai-d-block chai-mb-1">
+            chai-align-center → vertical center
+          </code>
+
+          <div
+            class="chai-d-flex chai-justify-between chai-align-center chai-bg-white chai-p-16px chai-border-radius-6px"
+          >
+            <span>Left</span>
+            <span>Center</span>
+            <span>Right</span>
+          </div> 
+          <h2 class="chai-text-2xl chai-font-bold chai-mb-1 chai-mt-4 chai-color-#8e44ad">
+            Grid Layout
+          </h2>
+
+          <p class="chai-mb-1 chai-color-#555555">
+            Create layouts using grid utilities.
+          </p>
+
+          <code class="chai-d-block chai-mb-1">
+            chai-d-grid → display: grid
+          </code>
+
+          <code class="chai-d-block chai-mb-1">
+            chai-grid-cols-3 → 3 columns
+          </code>
+
+          <div class="chai-d-grid chai-grid-cols-3 chai-gap-2">
+            <div class="chai-bg-white chai-p-12px">1</div>
+            <div class="chai-bg-white chai-p-12px">2</div>
+            <div class="chai-bg-white chai-p-12px">3</div>
+          </div>
+        </section>
+ <section
+          class="chai-mb-2 chai-p-16px chai-bg-#fef5e7 chai-border-radius-8px"
+        >
+          <h2 class="chai-text-2xl chai-font-bold chai-mb-1 chai-color-#c0392b">
+          <a name="shadows-and-effects"></a>  Shadows & Effects
+          </h2>
+          <p class="chai-mb-1 chai-color-#555555">
+            Use
+            <code class="chai-bg-#f2f2f2 chai-p-4px chai-border-radius-3px"
+              >chai-shadow-sm</code>
+            or
+            <code class="chai-bg-#f2f2f2 chai-p-4px chai-border-radius-3px"
+              >chai-shadow-md</code>:
+          </p>
+          <div
+            class="chai-shadow-md chai-p-12px chai-mb-1 chai-bg-white chai-border-radius-6px chai-color-#2c3e50"
+          >
+            class="chai-shadow-md"
+          </div>
+        </section>
+     
+
+        <section
+          class="chai-mb-1 chai-p-16px chai-bg-#eef2ff chai-border-radius-8px"
+        >
+          <h2 class="chai-text-2xl chai-font-bold chai-mb-1 chai-color-#34495e">
+            <a name="position" ></a>Position
+          </h2>
+
+          <p class="chai-mb-1 chai-color-#555555">
+            Control element positioning.
+          </p>
+
+          <code class="chai-d-block chai-mb-1">
+            chai-position-relative → position: relative
+          </code>
+
+          <code class="chai-d-block chai-mb-1">
+            chai-position-absolute → position: absolute
+          </code>
+
+          <code class="chai-d-block chai-mb-1">
+            chai-top-0 chai-right-0 → position offsets
+          </code>
+
+          <div class="chai-position-relative chai-bg-white chai-p-20px">
+            <div
+              class="chai-position-absolute chai-z-index-1  chai-top-0 chai-right-0 chai-bg-#e74c3c chai-color-white chai-p-4px"
+            >
+              <code>chai-absolute</code>
+            </div>
+            Parent (relative)
+          </div>
+        </section>
+
+        <section
+          class="chai-mb-1 chai-p-16px chai-bg-#f0f7ff chai-border-radius-8px"
+        >
+          <h2 class="chai-text-2xl chai-font-bold chai-mb-1 chai-color-#2c3e50">
+           <a name="misc-utilities" ></a> Misc Utilities
+          </h2>
+
+          <code class="chai-d-block chai-mb-1">
+            chai-cursor-pointer → cursor: pointer
+          </code>
+
+          <code class="chai-d-block chai-mb-1">
+            chai-opacity-50 → opacity: 0.5
+          </code>
+
+          <code class="chai-d-block chai-mb-1">
+            chai-overflow-hidden → overflow: hidden
+          </code>
+
+          <div
+            class="chai-bg-#3498db chai-cursor-pointer chai-opacity-50 chai-overflow-hidden chai-h-22px chai-p-12px chai-color-white"
+          >
+            Opacity, Cursor overflow
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
