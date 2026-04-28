@@ -5,35 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOM Projects</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
         h1 {
             color: #333;
+            text-align: center;
         }
         ul {
             list-style-type: none;
             padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         li {
-            margin: 10px 0;
+            flex-basis: 25%;
+            margin: 10px;
         }
         a {
             text-decoration: none;
             color: #007BFF;
+            display: block;
         }
         a:hover {
             text-decoration: underline;
         }
+        .project {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .project:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
-    <h1>DOM Projects</h1>
-    <ul>
-        <li><a href="dom-mini-projects/index.html">Dom Mini Project</a></li>
-        <li><a href="chai-tailwind/index.html">Chai Tailwind</a></li>
-        <li><a href="kanbanboard/index.html">Kanban Board</a></li>
-    </ul>
+    <div class="container">
+        <h1>DOM Projects</h1>
+        <ul>
+            <li>
+                <a href="dom-mini-projects/index.html">
+                    <div class="project">
+                        Dom Mini Project
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="chai-tailwind/index.html">
+                    <div class="project">
+                        Chai Tailwind
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="kanbanboard/index.html">
+                    <div class="project">
+                        Kanban Board
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
 </body>
 </html>
+

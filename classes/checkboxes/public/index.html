@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Million Checkboxes</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 32px 20px;
+            box-sizing: border-box;
+            background: radial-gradient(circle at top, #2b3a67 0%, #1f2937 45%, #111827 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #f3f4f6;
+        }
+
+        h1 {
+            margin: 0 auto 20px;
+            max-width: 1000px;
+            font-size: clamp(1.6rem, 3vw, 2.3rem);
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            color: #e5e7eb;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+        }
+
+        #container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 18px;
+            border-radius: 14px;
+            background: rgba(17, 24, 39, 0.78);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(24px, 1fr));
+            gap: 10px;
+            max-height: 82vh;
+            overflow: auto;
+        }
+
+        #container input[type='checkbox'] {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            cursor: pointer;
+            accent-color: #22c55e;
+            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
+            transition: transform 120ms ease;
+        }
+
+        #container input[type='checkbox']:hover {
+            transform: scale(1.08);
+        }
+
+        #container::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        #container::-webkit-scrollbar-track {
+            background: rgba(148, 163, 184, 0.12);
+            border-radius: 999px;
+        }
+
+        #container::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.42);
+            border-radius: 999px;
+        }
+
+        #container::-webkit-scrollbar-thumb:hover {
+            background: rgba(148, 163, 184, 0.65);
+        }
+
+        #errorMessage {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 14px 20px;
+            background: #dc2626;
+            color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+            display: none;
+            max-width: 350px;
+            font-size: 14px;
+            font-weight: 500;
+            animation: slideIn 0.3s ease;
+            z-index: 1000;
+        }
+
+        #errorMessage.show {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        #errorMessage .close-btn {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #errorMessage .close-btn:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Checkboxes</h1>
+    <div id="errorMessage">
+        <button class="close-btn">&times;</button>
+        <span id="errorText"></span>
+    </div>
+    <div id="container"></div>
+
+    <!-- Socket.io Client -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        const socket = io();
+        const container = document.getElementById('container');
+        const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+        const closeBtn = document.querySelector('.close-btn');
+        let errorTimeout;
+
+        function showError(message, duration = 5000) {
+            errorText.textContent = message;
+            errorMessage.classList.add('show');
+            console.warn(message);
+
+            clearTimeout(errorTimeout);
+            errorTimeout = setTimeout(() => {
+                errorMessage.classList.remove('show');
+            }, duration);
+        }
+
+        closeBtn.addEventListener('click', () => {
+            errorMessage.classList.remove('show');
+            clearTimeout(errorTimeout);
+        });
+
+        socket.on('connect', () => {
+            console.log('socket connected', socket.id);
+        });
+        socket.on('rate-limit-warning', (data) => {
+            showError(data.message, 5000);
+        });
+        socket.on('server-checkbox-changed', (data) => {
+            console.log('server-checkbox-changed', data);
+            const { index, checked } = data;
+            const checkbox = document.getElementById(`checkbox-${index}`);
+            if (checkbox) {
+                checkbox.checked = checked;
+            }
+        });
+
+        async function fetchInitialState() {
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+           const response = await fetch('/checkboxes', {method: 'GET'});
+            const data = await response.json();
+            if(data && data.checkboxes) {
+                data.checkboxes.forEach((serverValue, index) => {
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `checkbox-${index}`;
+                checkbox.checked = serverValue;
+                checkbox.addEventListener('change', (e) => {
+                    const checked = e.target.checked;
+                    if (typeof socket !== 'undefined') {
+                        socket.emit('client-checkbox-changed', { index, checked });
+                        fetchInitialState();
+                    }
+                });
+                container.appendChild(checkbox);
+            });  
+            }      
+        }
+
+        window.addEventListener('load', async () => {
+            fetchInitialState();
+        });
+    </script>
+</body>
+
+</html>
