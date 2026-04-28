@@ -27,3 +27,9 @@ redis need different connection for publisher and subscriber
 
 npx or pnpm dlx = it means dont need to install just for running
 or node --watch file.js
+
+cmds
+export PORT=8000 && node --watch index.js
+export PORT=8005 && node --watch index.js
+export PORT=9000 && node --watch index.js
+export PORT=9005 && node --watch index.js

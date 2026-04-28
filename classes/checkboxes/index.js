@@ -6,7 +6,7 @@ import { Server } from "socket.io";
 import { publisher, subscriber, redis } from "./redis-connecttion.js";
 
 const CHECKBOXES_COUNT = 500;
-const CHECKBOXES_KEY = "checkboxes-state-1";
+const CHECKBOXES_KEY = "checkboxes-state";
 
 let state = new Array(CHECKBOXES_COUNT).fill(false);
 
@@ -42,37 +42,53 @@ async function main() {
   io.on("connection", (socket) => {
     console.log("A user connected", socket.id);
 
-    socket.on("client-checkbox-changed", async (data) => {
-      console.log("client-checkbox-changed", data);
-      const lastOperationTime = rateLimitingHashMap.get(socket.id) || 0;
-      if (lastOperationTime) {
-        const timeElapsed = Date.now() - lastOperationTime;
-        if (timeElapsed < 5000) {
-          socket.emit("rate-limit-warning", {
-            message:
-              "Too quickly. Please wait before making more changes.",
-          });
-          return; // Ignore this operation
-        }
-      }
-      rateLimitingHashMap.set(socket.id, Date.now());
+    socket.on("disconnect", () => {
+      console.log("User disconnected", socket.id);
+      rateLimitingHashMap.delete(socket.id);
+    });
 
-      const existingState = await redis.get(CHECKBOXES_KEY);
-      if (existingState) {
+    socket.on("client-checkbox-changed", async (data) => {
+      try {
+        console.log("client-checkbox-changed", data);
+        
+        // Validate data
+        if (typeof data.index !== 'number' || typeof data.checked !== 'boolean' || data.index < 0 || data.index >= CHECKBOXES_COUNT) {
+          socket.emit("error", { message: "Invalid checkbox index" });
+          return;
+        }
+
+        // Rate limiting
+        const lastOperationTime = rateLimitingHashMap.get(socket.id) || 0;
+        if (lastOperationTime) {
+          const timeElapsed = Date.now() - lastOperationTime;
+          if (timeElapsed < 5000) {
+            socket.emit("rate-limit-warning", {
+              message: "Too quickly. Please wait before making more changes.",
+            });
+            return;
+          }
+        }
+        rateLimitingHashMap.set(socket.id, Date.now());
+
+        // Update state in Redis
+        let existingState = await redis.get(CHECKBOXES_KEY);
+        if (!existingState) {
+          existingState = JSON.stringify(new Array(CHECKBOXES_COUNT).fill(false));
+        }
+        
         const parsedState = JSON.parse(existingState);
         parsedState[data.index] = data.checked;
         await redis.set(CHECKBOXES_KEY, JSON.stringify(parsedState));
-      } else {
-        await redis.set(
-          CHECKBOXES_KEY,
-          JSON.stringify(new Array(CHECKBOXES_COUNT).fill(false)),
-        );
-      }
 
-      await publisher.publish(
-        "internal-server-checkbox-changed",
-        JSON.stringify(data),
-      );
+        // Broadcast change to all clients
+        await publisher.publish(
+          "internal-server-checkbox-changed",
+          JSON.stringify(data),
+        );
+      } catch (error) {
+        console.error("Error handling checkbox change:", error);
+        socket.emit("error", { message: "Failed to update checkbox" });
+      }
     });
   });
 
