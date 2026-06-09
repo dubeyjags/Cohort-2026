@@ -31,4 +31,5 @@ db.users.insertOne({ name: "Aman", age: 25 }) // Insert data
 db.users.find().pretty() // View data
 db.users.find({ age: 25 }) //Filter data
 db.users.find().limit(5) //Limit results
+db.users.deleteMany({}) // delete data
 ```
